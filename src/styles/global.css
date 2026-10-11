@@ -438,13 +438,19 @@ textarea {
 .skip {
   position: fixed;
   left: 15px;
-  top: -100px;
+  top: 15px;
+  clip-path: inset(100%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
   background: white;
   padding: 15px;
   z-index: 99;
 }
 .skip:focus {
-  top: 15px;
+  clip-path: none;
+  width: auto;
+  height: auto;
 }
 .mobile-nav {
   display: none;

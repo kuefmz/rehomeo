@@ -6,7 +6,7 @@ A mobile-first, statically rendered Astro + TypeScript website for apartment cle
 
 Use Node 24 LTS. `npm ci`, `npm run dev` (Astro development server), `npm run check`, `npm test`, `npm run build`, `npm run preview`. For the optional Node delivery adapter, build first and use `node --env-file=.env server/index.mjs` after copying `.env.example` to `.env`. Keep `.env` untracked. The static preview does not provide `/api/quote`.
 
-`npm run test:browser` runs Chromium checks against a local production build; install Chromium first with `npx playwright install chromium`. CI installs its OS dependencies as well. No production secrets are needed by tests.
+`npm run test:browser` runs Chromium checks against a local production build; install Chromium first with `npx playwright install chromium`. CI installs its OS dependencies as well. No production secrets are needed by tests. In restricted environments a local browser may be unable to launch; the GitHub CI workflow runs the same suite on a hosted runner. An existing Chromium binary can optionally be selected with `PLAYWRIGHT_EXECUTABLE_PATH`.
 
 ## Architecture
 

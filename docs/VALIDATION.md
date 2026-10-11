@@ -13,8 +13,14 @@ Prepared 12 October 2026. Repository initially contained only `README.md`; no ex
 - Unique titles/descriptions, one H1 per page and parseable Organization, Service, BreadcrumbList and Article JSON-LD. No fabricated publication date in Article data.
 - Adapter unit tests cover missing configuration, server validation, privacy acknowledgement, known payload mapping, consented allowlisted campaign attribution, explicit successful acknowledgement, duplicate requests, HTML HTTP 200, negative acknowledgement and network failure.
 
-## Browser and review scope
+## Browser results and visual review
 
 The committed Chromium suite checks all 105 routes at 360px, all four home/contact layouts at 390px, desktop homepages, keyboard skip links, mobile navigation, translated language-switch targets, required fields, flexible date, optional photos and mock loading/success/error states. Synthetic mock requests are clearly labelled and do not reach Websiteli. Screenshots are generated in ignored `test-results/` and retained as a CI artifact.
 
 Live Websiteli delivery is not verified. Routing, backend source and acknowledgement contract remain required; online submission is disabled. DNS, hosting, HTTPS redirects, public service operations, legal compliance and real field Core Web Vitals are not verified by local tests.
+
+## CI evidence
+
+GitHub Actions run [38185393767](https://github.com/kuefmz/rehomeo/actions/runs/38185393767) passed all checks, including all six Chromium tests (8.6 seconds). The browser-results artifact includes desktop/mobile screenshots in all four languages. Reviewed German desktop homepage, Italian mobile homepage and English mobile contact form for spacing, typography, hierarchy, wrapping and optional-photo messaging. A hidden skip-link screenshot artefact was corrected after this review.
+
+Chromium could not open a page inside the restricted local workspace. Browser verification therefore ran successfully on GitHub’s hosted runner, rather than being inferred from a local build. The workflow is retained as a merge check.
