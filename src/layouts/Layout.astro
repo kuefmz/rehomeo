@@ -1,0 +1,239 @@
+---
+import {
+  locales,
+  site,
+  path,
+  absolute,
+  type Locale,
+  type PageKey,
+} from "../data/routes";
+import "../styles/global.css";
+interface Props {
+  lang: Locale;
+  pageKey?: PageKey;
+  title: string;
+  description: string;
+  alternatives?: Record<string, string>;
+  article?: any;
+  noindex?: boolean;
+}
+const {
+  lang,
+  pageKey = "home",
+  title,
+  description,
+  alternatives,
+  article,
+  noindex = false,
+} = Astro.props;
+const c = site[lang];
+const current = Astro.url.pathname;
+const links =
+  alternatives || Object.fromEntries(locales.map((l) => [l, path(l, pageKey)]));
+const org = {
+  "@type": "Organization",
+  "@id": absolute("/#organization"),
+  name: "Rehomeo",
+  url: absolute("/"),
+};
+const crumbs = [
+  {
+    "@type": "ListItem",
+    position: 1,
+    name: c.names.home,
+    item: absolute(path(lang)),
+  },
+  ...(pageKey !== "home"
+    ? [
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: c.names[pageKey],
+          item: absolute(path(lang, pageKey)),
+        },
+      ]
+    : []),
+  ...(article
+    ? [
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: title,
+          item: absolute(current),
+        },
+      ]
+    : []),
+];
+const graph = [
+  org,
+  { "@type": "BreadcrumbList", itemListElement: crumbs },
+  ...(["clearance", "pickup"].includes(pageKey)
+    ? [
+        {
+          "@type": "Service",
+          name: title,
+          description,
+          provider: { "@id": absolute("/#organization") },
+          url: absolute(current),
+        },
+      ]
+    : []),
+  ...(article
+    ? [
+        {
+          "@type": "Article",
+          headline: title,
+          description,
+          inLanguage: lang,
+          author: { "@type": "Organization", name: "Rehomeo" },
+          mainEntityOfPage: absolute(current),
+          ...(article.publishedAt
+            ? { datePublished: article.publishedAt }
+            : {}),
+          ...(article.updatedAt ? { dateModified: article.updatedAt } : {}),
+        },
+      ]
+    : []),
+];
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title} | Rehomeo</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={absolute(current)} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    {locales.map((l) => (
+      <link rel="alternate" hreflang={l + "-CH"} href={absolute(links[l])} />
+    ))}
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={absolute(article ? links.de : pageKey === "home" ? "/" : links.de)}
+    />
+    <meta property="og:title" content={title + " | Rehomeo"} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={absolute(current)} />
+    <meta property="og:type" content={article ? "article" : "website"} />
+    <meta property="og:image" content={absolute("/social.png")} />
+    <meta property="og:image:alt" content={c.illustration} />
+    <meta property="og:locale" content={lang + "_CH"} />
+    <meta name="theme-color" content="#244c3e" />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": graph,
+      }).replace(/</g, "\\u003c")}
+    />
+  </head>
+  <body>
+    <a class="skip" href="#main">
+      {c.skip}
+    </a>
+    <header class="header">
+      <a class="brand" href={path(lang)} aria-label="Rehomeo">
+        rehomeo<span aria-hidden="true">↗</span>
+      </a>
+      <nav aria-label={c.menu}>
+        <details class="mobile-nav">
+          <summary>{c.menu}</summary>
+          <div>
+            {(
+              [
+                "how",
+                "clearance",
+                "pickup",
+                "reuse",
+                "coverage",
+                "faq",
+                "blog",
+              ] as PageKey[]
+            ).map((k) => (
+              <a href={path(lang, k)}>{c.names[k]}</a>
+            ))}
+          </div>
+        </details>
+        <div class="desktop-nav">
+          {(["how", "clearance", "pickup", "reuse"] as PageKey[]).map((k) => (
+            <a
+              href={path(lang, k)}
+              aria-current={pageKey === k ? "page" : undefined}
+            >
+              {c.names[k]}
+            </a>
+          ))}
+        </div>
+      </nav>
+      <a class="button small" href={path(lang, "contact")}>
+        {c.names.contact}
+      </a>
+    </header>
+    <div class="language-bar">
+      <nav aria-label={c.languages}>
+        {locales.map((l) => (
+          <a
+            href={links[l]}
+            lang={l}
+            hreflang={l}
+            aria-current={lang === l ? "page" : undefined}
+          >
+            {
+              { de: "Deutsch", en: "English", fr: "Français", it: "Italiano" }[
+                l
+              ]
+            }
+          </a>
+        ))}
+      </nav>
+    </div>
+    <main id="main" tabindex="-1">
+      {pageKey !== "home" && (
+        <nav class="breadcrumbs shell" aria-label={c.menu}>
+          <a href={path(lang)}>{c.names.home}</a>
+          <span aria-hidden="true"> / </span>
+          {article ? (
+            <>
+              <a href={path(lang, "blog")}>{c.names.blog}</a>
+              <span aria-hidden="true"> / </span>
+              <span>{title}</span>
+            </>
+          ) : (
+            <span>{c.names[pageKey]}</span>
+          )}
+        </nav>
+      )}
+      <slot />
+    </main>
+    <footer class="footer">
+      <div class="shell">
+        <a class="brand" href={path(lang)}>
+          rehomeo<span aria-hidden="true">↗</span>
+        </a>
+        <p>{c.footer}</p>
+        <div class="footer-links">
+          {(
+            [
+              "how",
+              "clearance",
+              "pickup",
+              "reuse",
+              "coverage",
+              "faq",
+              "contact",
+              "blog",
+              "privacy",
+              "business",
+            ] as PageKey[]
+          ).map((k) => (
+            <a href={path(lang, k)}>{c.names[k]}</a>
+          ))}
+        </div>
+        <p class="fine">© {new Date().getFullYear()} Rehomeo</p>
+      </div>
+    </footer>
+  </body>
+</html>

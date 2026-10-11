@@ -1,0 +1,390 @@
+{
+  "en": {
+    "tag": "ROOM FOR WHAT COMES NEXT",
+    "hero": "Move out with less on your mind.",
+    "intro": "An entire apartment, a few pieces of furniture, or the household items you are leaving behind. Rehomeo helps organise clearance and pickup, with reuse at the heart of the plan.",
+    "note": "Enquiries across Switzerland. Availability, scope, prices and dates confirmed individually.",
+    "services": "One clear plan. More possibilities.",
+    "values": "Clear your space. Keep useful things in use.",
+    "valueText": "Convenience, thoughtful reuse and finding suitable next homes belong together. We seek recipients or donation channels where arrangements allow, including people setting up a home with limited resources. A donation is never guaranteed.",
+    "steps": [
+      "Tell us what is leaving",
+      "Agree the scope and quote",
+      "Prepare for the agreed collection"
+    ],
+    "stepText": [
+      "Share your location, items, access and preferred timing. Photos are optional.",
+      "We assess availability, access and possible reuse. You approve the price, scope and date separately.",
+      "Keep belongings you are taking clearly apart. Collection follows the confirmed agreement."
+    ],
+    "ctaText": "Tell us about your space.",
+    "ctaSub": "An enquiry starts a conversation. It does not reserve a collection.",
+    "skip": "Skip to content",
+    "languages": "Language",
+    "menu": "Navigation",
+    "read": "Read the guide",
+    "related": "Related reading",
+    "sources": "Sources and limitations",
+    "author": "Rehomeo editorial",
+    "draft": "Editorial draft · prepared 12 October 2026 · not yet published",
+    "illustration": "Illustration of furniture ready for a new home",
+    "footer": "Clearance and pickup with reuse in mind.",
+    "legal": "Owner information is awaiting verification. This page is a preparation draft, not a completed legal notice.",
+    "unavailable": "Online enquiries are not yet enabled. Delivery and operator information must be verified before launch. Your information has not been sent.",
+    "formIntro": "Choose complete clearance or selected items. This service removes items you are leaving behind; it does not transport your belongings to your next home.",
+    "photos": "Photos are optional. Online uploads are not currently supported; arrange how to supply photos after your enquiry.",
+    "germany": "Germany enquiries are subject to availability; expansion is planned, not an established service network.",
+    "env": "Longer use can reduce waste and demand for replacement products. The outcome depends on condition, transport, storage and actual reuse. We do not calculate or promise carbon savings.",
+    "policy": "Suitable items are assessed for reuse. Recipients and donation channels depend on practical arrangements. Any resale route must be disclosed in your agreement. Handling of unsuitable items, recycling and disposal must be agreed before collection.",
+    "cost": "Customers pay for collection and clearance unless another arrangement is explicitly agreed. A possible donation does not make transport free.",
+    "excluded": "Tell us about damage, damp, pests, unsafe items or unusual waste before agreeing a collection. Hazardous materials, electrical disconnection and specialist work require separate assessment; do not assume they are included.",
+    "coverage": "You can request a quote from anywhere in Switzerland. This is an enquiry area, not a claim of an established nationwide pickup network. Send your postcode, town and timing so availability can be checked.",
+    "clearance": "For a complete move-out, start with a room-by-room inventory. Include cellars, balconies and storage only if you want them in the scope. Agree what stays, what leaves and whether dismantling is needed. Cleaning, repairs and transport to your new home are not included unless separately agreed.",
+    "pickup": "For selected items, list each piece, quantity, dimensions and condition. Furniture, kitchenware, books and other smaller household items can be considered individually. Acceptance is assessed, not guaranteed. Separate personal documents and items you intend to keep.",
+    "how": "Start with the items and the deadline, then confirm access. A personalised quote sets out the work before a collection date is agreed. No payment or reservation is created by submitting an enquiry.",
+    "faqPairs": [
+      [
+        "Is a request a booking?",
+        "No. Availability, scope, price and collection date require a separate agreement."
+      ],
+      [
+        "Will everything be donated?",
+        "No. Suitability, recipient needs and logistics determine whether reuse or donation is possible."
+      ],
+      [
+        "Can you take my belongings to my next home?",
+        "Our core service is clearance and collecting items you leave behind. Moving your belongings to another home is a different service."
+      ],
+      [
+        "Do I need photos?",
+        "No. A detailed description is enough to start. Photos can be arranged afterwards."
+      ],
+      [
+        "What does it cost?",
+        "There is no published fixed price. Volume, access, dismantling, travel and agreed handling affect the quote."
+      ],
+      [
+        "Can I request service in Germany?",
+        "Yes, but availability must be assessed individually. There is no confirmed German service network."
+      ]
+    ],
+    "routes": {
+      "home": "",
+      "how": "how-it-works",
+      "clearance": "apartment-clearance",
+      "pickup": "furniture-pickup",
+      "reuse": "reuse",
+      "coverage": "coverage",
+      "faq": "faq",
+      "contact": "request-a-quote",
+      "blog": "guides",
+      "privacy": "privacy",
+      "business": "business-information"
+    },
+    "names": {
+      "home": "Home",
+      "how": "How it works",
+      "clearance": "Complete apartment clearance",
+      "pickup": "Furniture & household-item pickup",
+      "reuse": "A second life for useful things",
+      "coverage": "Service coverage",
+      "faq": "Frequently asked questions",
+      "contact": "Request a quote",
+      "blog": "Practical guides",
+      "privacy": "Privacy",
+      "business": "Business information"
+    },
+    "lang": "en"
+  },
+  "de": {
+    "tag": "PLATZ FÜR DAS, WAS KOMMT",
+    "hero": "Ausziehen mit weniger Aufwand.",
+    "intro": "Eine ganze Wohnung, einzelne Möbel oder Haushaltsgegenstände, die Sie zurücklassen. Rehomeo hilft, Räumung und Abholung zu organisieren – mit Wiederverwendung als Leitgedanken.",
+    "note": "Anfragen aus der ganzen Schweiz. Verfügbarkeit, Umfang, Preis und Termin werden individuell bestätigt.",
+    "services": "Ein klarer Plan. Neue Möglichkeiten.",
+    "values": "Platz schaffen. Brauchbares weitergeben.",
+    "valueText": "Eine einfache Räumung, sinnvolle Wiederverwendung und passende neue Zuhause gehören zusammen. Wo es organisatorisch möglich ist, suchen wir Empfänger oder Spendenwege, auch für Menschen mit begrenzten Mitteln. Eine Spende ist nie garantiert.",
+    "steps": [
+      "Beschreiben, was gehen soll",
+      "Umfang und Offerte vereinbaren",
+      "Die vereinbarte Abholung vorbereiten"
+    ],
+    "stepText": [
+      "Nennen Sie Ort, Gegenstände, Zugang und Wunschtermin. Fotos sind optional.",
+      "Wir prüfen Verfügbarkeit, Zugang und mögliche Wiederverwendung. Preis, Umfang und Termin bestätigen Sie separat.",
+      "Trennen Sie mitgenommene Sachen deutlich. Die Abholung erfolgt gemäss bestätigter Vereinbarung."
+    ],
+    "ctaText": "Erzählen Sie uns von Ihrer Wohnung.",
+    "ctaSub": "Eine Anfrage beginnt ein Gespräch. Sie reserviert keine Abholung.",
+    "skip": "Zum Inhalt",
+    "languages": "Sprache",
+    "menu": "Navigation",
+    "read": "Ratgeber lesen",
+    "related": "Weitere Ratgeber",
+    "sources": "Quellen und Grenzen",
+    "author": "Rehomeo Redaktion",
+    "draft": "Redaktioneller Entwurf · erstellt am 12. Oktober 2026 · noch nicht veröffentlicht",
+    "illustration": "Illustration von Möbeln für ein neues Zuhause",
+    "footer": "Räumung und Abholung mit Wiederverwendung im Blick.",
+    "legal": "Die Betreiberangaben müssen noch überprüft werden. Diese Seite ist ein vorbereiteter Entwurf, keine vollständige rechtliche Information.",
+    "unavailable": "Online-Anfragen sind noch nicht freigeschaltet. Zustellung und Betreiberangaben müssen vor dem Start geprüft werden. Ihre Angaben wurden nicht gesendet.",
+    "formIntro": "Wählen Sie komplette Räumung oder einzelne Gegenstände. Wir holen ab, was Sie zurücklassen; wir transportieren Ihre Sachen nicht in Ihre nächste Wohnung.",
+    "photos": "Fotos sind optional. Online-Uploads werden derzeit nicht unterstützt; vereinbaren Sie die Fotoübermittlung nach Ihrer Anfrage.",
+    "germany": "Anfragen aus Deutschland sind von der Verfügbarkeit abhängig. Die Expansion ist geplant, ein bestehendes Netzwerk wird nicht zugesichert.",
+    "env": "Eine längere Nutzung kann Abfall und den Bedarf an Ersatzprodukten verringern. Zustand, Transport, Lagerung und tatsächliche Wiederverwendung beeinflussen das Ergebnis. Wir berechnen oder versprechen keine CO₂-Einsparungen.",
+    "policy": "Geeignete Gegenstände werden auf Wiederverwendung geprüft. Empfänger und Spendenwege hängen von praktischen Möglichkeiten ab. Ein allfälliger Weiterverkauf muss in Ihrer Vereinbarung offengelegt werden. Der Umgang mit ungeeigneten Gegenständen, Recycling und Entsorgung wird vor der Abholung vereinbart.",
+    "cost": "Kundinnen und Kunden bezahlen Räumung und Abholung, sofern nichts anderes ausdrücklich vereinbart wird. Eine mögliche Spende macht den Transport nicht kostenlos.",
+    "excluded": "Melden Sie Schäden, Feuchtigkeit, Schädlinge, unsichere Gegenstände und besondere Abfälle vor der Vereinbarung. Gefahrstoffe, Elektroanschlüsse und Spezialarbeiten müssen gesondert geprüft werden; sie sind nicht automatisch enthalten.",
+    "coverage": "Sie können aus der ganzen Schweiz eine Offerte anfragen. Dies bezeichnet das Anfragegebiet, kein etabliertes schweizweites Abholnetz. Mit Postleitzahl, Ort und Zeitfenster lässt sich die Verfügbarkeit prüfen.",
+    "clearance": "Erstellen Sie für den vollständigen Auszug eine Liste pro Raum. Nehmen Sie Keller, Balkon und Lagerräume nur auf, wenn diese zum Auftrag gehören sollen. Vereinbaren Sie, was bleibt, was geht und welche Demontage nötig ist. Reinigung, Reparaturen und Transport in Ihre neue Wohnung sind ohne separate Vereinbarung nicht enthalten.",
+    "pickup": "Listen Sie für eine Teilabholung jedes Stück mit Anzahl, Massen und Zustand auf. Möbel, Küchenutensilien, Bücher und weitere kleinere Haushaltsgegenstände können einzeln geprüft werden. Die Annahme ist nicht garantiert. Entfernen Sie persönliche Dokumente und Dinge, die Sie behalten möchten.",
+    "how": "Beginnen Sie mit Gegenständen und Frist, klären Sie danach den Zugang. Eine individuelle Offerte beschreibt die Arbeiten, bevor ein Termin vereinbart wird. Eine Anfrage löst weder Zahlung noch Reservation aus.",
+    "faqPairs": [
+      [
+        "Ist eine Anfrage eine Buchung?",
+        "Nein. Verfügbarkeit, Umfang, Preis und Abholtermin werden separat vereinbart."
+      ],
+      [
+        "Wird alles gespendet?",
+        "Nein. Zustand, Bedarf der Empfänger und Logistik bestimmen, ob Wiederverwendung oder Spende möglich ist."
+      ],
+      [
+        "Bringen Sie meine Sachen in die neue Wohnung?",
+        "Unser Kerndienst ist die Räumung und Abholung zurückgelassener Dinge. Ein Umzugstransport ist eine andere Dienstleistung."
+      ],
+      [
+        "Brauche ich Fotos?",
+        "Nein. Eine genaue Beschreibung reicht für den Anfang. Fotos können später vereinbart werden."
+      ],
+      [
+        "Was kostet es?",
+        "Es gibt keinen veröffentlichten Fixpreis. Menge, Zugang, Demontage, Anfahrt und vereinbarte Behandlung beeinflussen die Offerte."
+      ],
+      [
+        "Kann ich aus Deutschland anfragen?",
+        "Ja, aber die Verfügbarkeit wird individuell geprüft. Ein deutsches Servicenetz ist nicht bestätigt."
+      ]
+    ],
+    "routes": {
+      "home": "",
+      "how": "so-funktioniert-es",
+      "clearance": "wohnungsraeumung",
+      "pickup": "moebelabholung",
+      "reuse": "wiederverwendung",
+      "coverage": "einsatzgebiet",
+      "faq": "fragen",
+      "contact": "offerte-anfragen",
+      "blog": "ratgeber",
+      "privacy": "datenschutz",
+      "business": "impressum"
+    },
+    "names": {
+      "home": "Startseite",
+      "how": "So funktioniert es",
+      "clearance": "Komplette Wohnungsräumung",
+      "pickup": "Möbel & Haushaltsgegenstände abholen",
+      "reuse": "Wiederverwenden statt wegwerfen",
+      "coverage": "Einsatzgebiet",
+      "faq": "Häufige Fragen",
+      "contact": "Offerte anfragen",
+      "blog": "Ratgeber",
+      "privacy": "Datenschutz",
+      "business": "Impressum"
+    },
+    "lang": "de"
+  },
+  "fr": {
+    "tag": "DE LA PLACE POUR LA SUITE",
+    "hero": "Quittez votre logement l’esprit plus léger.",
+    "intro": "Un appartement entier, quelques meubles ou les objets ménagers que vous laissez. Rehomeo aide à organiser le débarras et la collecte, en donnant la priorité au réemploi.",
+    "note": "Demandes dans toute la Suisse. Disponibilité, périmètre, prix et dates confirmés individuellement.",
+    "services": "Un plan clair. De nouvelles possibilités.",
+    "values": "Libérez l’espace. Prolongez l’usage.",
+    "valueText": "Un débarras pratique, un réemploi réfléchi et de nouveaux foyers adaptés vont ensemble. Lorsque les arrangements le permettent, nous recherchons des destinataires ou des circuits de don, notamment pour des personnes disposant de peu de moyens. Aucun don n’est garanti.",
+    "steps": [
+      "Décrivez ce qui doit partir",
+      "Convenez du périmètre et du devis",
+      "Préparez la collecte convenue"
+    ],
+    "stepText": [
+      "Indiquez le lieu, les objets, l’accès et la période souhaitée. Les photos sont facultatives.",
+      "Nous évaluons la disponibilité, l’accès et le réemploi possible. Vous confirmez séparément le prix, le périmètre et la date.",
+      "Séparez clairement les affaires que vous emportez. La collecte suit l’accord confirmé."
+    ],
+    "ctaText": "Parlez-nous de votre logement.",
+    "ctaSub": "Une demande ouvre la discussion. Elle ne réserve pas une collecte.",
+    "skip": "Aller au contenu",
+    "languages": "Langue",
+    "menu": "Navigation",
+    "read": "Lire le guide",
+    "related": "Guides associés",
+    "sources": "Sources et limites",
+    "author": "Rédaction Rehomeo",
+    "draft": "Brouillon éditorial · préparé le 12 octobre 2026 · pas encore publié",
+    "illustration": "Illustration de meubles destinés à un nouveau foyer",
+    "footer": "Débarras et collecte avec le réemploi à l’esprit.",
+    "legal": "Les informations sur l’exploitant restent à vérifier. Cette page est un brouillon préparatoire, pas une notice juridique complète.",
+    "unavailable": "Les demandes en ligne ne sont pas encore activées. La livraison et les informations sur l’exploitant doivent être vérifiées avant le lancement. Vos données n’ont pas été envoyées.",
+    "formIntro": "Choisissez un débarras complet ou certains objets. Ce service enlève ce que vous laissez ; il ne transporte pas vos affaires vers votre prochain logement.",
+    "photos": "Les photos sont facultatives. Leur téléchargement n’est pas pris en charge actuellement ; convenez de leur transmission après votre demande.",
+    "germany": "Les demandes en Allemagne dépendent de la disponibilité. L’expansion est prévue, sans réseau de collecte établi.",
+    "env": "Une utilisation prolongée peut réduire les déchets et le besoin de produits de remplacement. L’état, le transport, le stockage et le réemploi effectif influencent le résultat. Nous ne calculons ni ne promettons d’économies de CO₂.",
+    "policy": "Les objets adaptés sont évalués pour le réemploi. Destinataires et circuits de don dépendent des possibilités pratiques. Toute revente éventuelle doit être indiquée dans votre accord. Le traitement des objets inadaptés, le recyclage et l’élimination sont à convenir avant la collecte.",
+    "cost": "Les clients paient la collecte et le débarras, sauf accord contraire explicite. Un don éventuel ne rend pas le transport gratuit.",
+    "excluded": "Signalez dégâts, humidité, nuisibles, objets dangereux ou déchets particuliers avant l’accord. Matières dangereuses, déconnexion électrique et travaux spécialisés nécessitent une évaluation distincte et ne sont pas automatiquement inclus.",
+    "coverage": "Vous pouvez demander un devis depuis toute la Suisse. Il s’agit d’une zone de demandes, pas d’un réseau national de collecte établi. Indiquez code postal, localité et période pour vérifier la disponibilité.",
+    "clearance": "Pour quitter entièrement un logement, établissez un inventaire pièce par pièce. Incluez cave, balcon et espaces de stockage uniquement si vous souhaitez leur débarras. Convenez de ce qui reste, de ce qui part et du démontage nécessaire. Nettoyage, réparations et transport vers votre nouveau logement ne sont pas inclus sans accord séparé.",
+    "pickup": "Pour une collecte partielle, listez chaque objet, sa quantité, ses dimensions et son état. Meubles, ustensiles de cuisine, livres et petits objets ménagers peuvent être évalués individuellement. Leur acceptation n’est pas garantie. Séparez documents personnels et affaires à conserver.",
+    "how": "Commencez par les objets et l’échéance, puis confirmez l’accès. Un devis personnalisé décrit les travaux avant de convenir d’une date. Envoyer une demande ne crée ni paiement ni réservation.",
+    "faqPairs": [
+      [
+        "Une demande est-elle une réservation ?",
+        "Non. Disponibilité, périmètre, prix et date font l’objet d’un accord séparé."
+      ],
+      [
+        "Tout sera-t-il donné ?",
+        "Non. État, besoins des destinataires et logistique déterminent si le réemploi ou le don est possible."
+      ],
+      [
+        "Transportez-vous mes affaires au nouveau logement ?",
+        "Notre service principal est le débarras et la collecte des objets laissés. Le déménagement vers un autre logement est un service différent."
+      ],
+      [
+        "Faut-il des photos ?",
+        "Non. Une description détaillée suffit pour commencer. Leur transmission peut être convenue ensuite."
+      ],
+      [
+        "Combien cela coûte-t-il ?",
+        "Il n’y a pas de tarif fixe publié. Volume, accès, démontage, déplacement et traitement convenu influencent le devis."
+      ],
+      [
+        "Puis-je faire une demande depuis l’Allemagne ?",
+        "Oui, mais la disponibilité est évaluée individuellement. Aucun réseau allemand n’est confirmé."
+      ]
+    ],
+    "routes": {
+      "home": "",
+      "how": "comment-ca-marche",
+      "clearance": "debarras-appartement",
+      "pickup": "collecte-meubles",
+      "reuse": "reemploi",
+      "coverage": "zones-desservies",
+      "faq": "questions",
+      "contact": "demander-un-devis",
+      "blog": "conseils",
+      "privacy": "confidentialite",
+      "business": "informations-legales"
+    },
+    "names": {
+      "home": "Accueil",
+      "how": "Comment ça marche",
+      "clearance": "Débarras complet d’appartement",
+      "pickup": "Collecte de meubles et objets ménagers",
+      "reuse": "Une seconde vie pour les objets utiles",
+      "coverage": "Zones desservies",
+      "faq": "Questions fréquentes",
+      "contact": "Demander un devis",
+      "blog": "Conseils pratiques",
+      "privacy": "Confidentialité",
+      "business": "Informations légales"
+    },
+    "lang": "fr"
+  },
+  "it": {
+    "tag": "SPAZIO PER CIÒ CHE VERRÀ",
+    "hero": "Lascia casa con meno pensieri.",
+    "intro": "Un intero appartamento, alcuni mobili o gli oggetti domestici che lasci. Rehomeo aiuta a organizzare sgombero e ritiro, dando priorità al riutilizzo.",
+    "note": "Richieste da tutta la Svizzera. Disponibilità, ambito, prezzi e date confermati individualmente.",
+    "services": "Un piano chiaro. Nuove possibilità.",
+    "values": "Libera spazio. Mantieni in uso ciò che serve.",
+    "valueText": "Uno sgombero pratico, un riutilizzo attento e nuove case adatte vanno insieme. Quando possibile, cerchiamo destinatari o canali di donazione, anche per persone con risorse limitate. La donazione non è mai garantita.",
+    "steps": [
+      "Descrivi cosa deve partire",
+      "Concorda l’ambito e il preventivo",
+      "Prepara il ritiro concordato"
+    ],
+    "stepText": [
+      "Indica luogo, oggetti, accesso e periodo preferito. Le foto sono facoltative.",
+      "Valutiamo disponibilità, accesso e possibile riutilizzo. Confermi separatamente prezzo, ambito e data.",
+      "Separa chiaramente ciò che porti con te. Il ritiro segue l’accordo confermato."
+    ],
+    "ctaText": "Parlaci del tuo appartamento.",
+    "ctaSub": "Una richiesta avvia una conversazione. Non prenota un ritiro.",
+    "skip": "Vai al contenuto",
+    "languages": "Lingua",
+    "menu": "Navigazione",
+    "read": "Leggi la guida",
+    "related": "Guide correlate",
+    "sources": "Fonti e limiti",
+    "author": "Redazione Rehomeo",
+    "draft": "Bozza editoriale · preparata il 12 ottobre 2026 · non ancora pubblicata",
+    "illustration": "Illustrazione di mobili destinati a una nuova casa",
+    "footer": "Sgombero e ritiro pensando al riutilizzo.",
+    "legal": "I dati dell’operatore devono ancora essere verificati. Questa pagina è una bozza preparatoria, non un’informativa legale completa.",
+    "unavailable": "Le richieste online non sono ancora attive. Consegna e dati dell’operatore devono essere verificati prima del lancio. I tuoi dati non sono stati inviati.",
+    "formIntro": "Scegli lo sgombero completo o singoli oggetti. Il servizio ritira ciò che lasci; non trasporta i tuoi beni nella prossima casa.",
+    "photos": "Le foto sono facoltative. Il caricamento online non è attualmente supportato; concorda come inviarle dopo la richiesta.",
+    "germany": "Le richieste dalla Germania sono soggette a disponibilità. L’espansione è prevista, senza una rete di ritiro già stabilita.",
+    "env": "Un uso più lungo può ridurre rifiuti e necessità di prodotti sostitutivi. Condizioni, trasporto, deposito e riutilizzo effettivo influenzano il risultato. Non calcoliamo né promettiamo risparmi di CO₂.",
+    "policy": "Gli oggetti idonei vengono valutati per il riutilizzo. Destinatari e canali di donazione dipendono dalle possibilità pratiche. Un’eventuale rivendita deve essere dichiarata nell’accordo. Gestione degli oggetti non idonei, riciclaggio e smaltimento vanno concordati prima del ritiro.",
+    "cost": "I clienti pagano ritiro e sgombero salvo diverso accordo esplicito. Una possibile donazione non rende gratuito il trasporto.",
+    "excluded": "Segnala danni, umidità, parassiti, oggetti pericolosi o rifiuti particolari prima dell’accordo. Sostanze pericolose, disconnessioni elettriche e lavori specialistici richiedono una valutazione separata e non sono automaticamente inclusi.",
+    "coverage": "Puoi richiedere un preventivo da tutta la Svizzera. È un’area di richieste, non una rete nazionale di ritiro già stabilita. Indica NPA, località e periodo per verificare la disponibilità.",
+    "clearance": "Per lasciare completamente un appartamento, prepara un inventario stanza per stanza. Includi cantina, balcone e depositi solo se desideri inserirli nell’incarico. Concorda cosa resta, cosa parte e l’eventuale smontaggio. Pulizia, riparazioni e trasporto nella nuova casa non sono inclusi senza accordo separato.",
+    "pickup": "Per un ritiro parziale, elenca ogni oggetto, quantità, dimensioni e condizioni. Mobili, utensili da cucina, libri e piccoli oggetti domestici possono essere valutati singolarmente. L’accettazione non è garantita. Separa documenti personali e oggetti da conservare.",
+    "how": "Parti dagli oggetti e dalla scadenza, poi conferma l’accesso. Un preventivo personalizzato descrive il lavoro prima di concordare una data. Inviare una richiesta non comporta pagamento né prenotazione.",
+    "faqPairs": [
+      [
+        "Una richiesta è una prenotazione?",
+        "No. Disponibilità, ambito, prezzo e data del ritiro richiedono un accordo separato."
+      ],
+      [
+        "Viene donato tutto?",
+        "No. Condizioni, esigenze dei destinatari e logistica determinano se riutilizzo o donazione sono possibili."
+      ],
+      [
+        "Trasportate i miei beni nella nuova casa?",
+        "Il servizio principale è lo sgombero e il ritiro di ciò che lasci. Il trasloco verso un’altra casa è un servizio diverso."
+      ],
+      [
+        "Servono foto?",
+        "No. Una descrizione dettagliata basta per iniziare. Le foto possono essere concordate in seguito."
+      ],
+      [
+        "Quanto costa?",
+        "Non c’è una tariffa fissa pubblicata. Volume, accesso, smontaggio, viaggio e gestione concordata influiscono sul preventivo."
+      ],
+      [
+        "Posso richiedere un ritiro in Germania?",
+        "Sì, ma la disponibilità viene valutata individualmente. Non è confermata una rete tedesca."
+      ]
+    ],
+    "routes": {
+      "home": "",
+      "how": "come-funziona",
+      "clearance": "sgombero-appartamento",
+      "pickup": "ritiro-mobili",
+      "reuse": "riutilizzo",
+      "coverage": "copertura",
+      "faq": "domande",
+      "contact": "richiedi-preventivo",
+      "blog": "guide",
+      "privacy": "privacy",
+      "business": "informazioni-aziendali"
+    },
+    "names": {
+      "home": "Home",
+      "how": "Come funziona",
+      "clearance": "Sgombero completo dell’appartamento",
+      "pickup": "Ritiro di mobili e oggetti domestici",
+      "reuse": "Una seconda vita per gli oggetti utili",
+      "coverage": "Copertura del servizio",
+      "faq": "Domande frequenti",
+      "contact": "Richiedi un preventivo",
+      "blog": "Guide pratiche",
+      "privacy": "Informativa sulla privacy",
+      "business": "Informazioni aziendali"
+    },
+    "lang": "it"
+  }
+}

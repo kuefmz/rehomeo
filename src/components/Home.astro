@@ -1,0 +1,89 @@
+---
+import { site, path, type Locale } from "../data/routes";
+import CTA from "./CTA.astro";
+const { lang } = Astro.props as { lang: Locale };
+const c = site[lang];
+---
+
+<section class="hero shell">
+  <div>
+    <p class="eyebrow">{c.tag}</p>
+    <h1>{c.hero}</h1>
+    <p class="lead">{c.intro}</p>
+    <a class="button" href={path(lang, "contact")}>
+      {c.names.contact} <span aria-hidden="true">↗</span>
+    </a>
+    <p class="fine">{c.note}</p>
+  </div>
+  <img
+    src="/furniture.svg"
+    width="880"
+    height="760"
+    alt={c.illustration}
+    fetchpriority="high"
+  />
+</section>
+<section class="shell section">
+  <p class="eyebrow">REHOMEO</p>
+  <h2>{c.services}</h2>
+  <div class="cards">
+    {(["clearance", "pickup", "reuse"] as const).map((k, i) => (
+      <a class="card" href={path(lang, k)}>
+        <span class="number">0{i + 1}</span>
+        <h3>{c.names[k]}</h3>
+        <p>
+          {k === "clearance"
+            ? c.clearance
+            : k === "pickup"
+              ? c.pickup
+              : c.valueText}
+        </p>
+        <span aria-hidden="true">↗</span>
+      </a>
+    ))}
+  </div>
+</section>
+<section class="band">
+  <div class="shell values">
+    <div>
+      <p class="eyebrow">{c.names.reuse}</p>
+      <h2>{c.values}</h2>
+    </div>
+    <div>
+      <p class="lead">{c.valueText}</p>
+      <p>
+        {c.env}{" "}
+        <a
+          href={`https://www.bafu.admin.ch/${lang}/${{ de: "kreislaufwirtschaft", en: "circular-economy", fr: "economie-circulaire", it: "economia-circolare" }[lang]}`}
+        >
+          {lang === "de"
+            ? "BAFU"
+            : lang === "fr"
+              ? "OFEV"
+              : lang === "it"
+                ? "UFAM"
+                : "FOEN"}
+        </a>
+      </p>
+      <a class="text-link" href={path(lang, "reuse")}>
+        {c.names.reuse} ↗
+      </a>
+    </div>
+  </div>
+</section>
+<section class="shell section">
+  <h2>{c.names.how}</h2>
+  <div class="cards">
+    {c.steps.map((s, i) => (
+      <div class="step">
+        <span class="number">0{i + 1}</span>
+        <h3>{s}</h3>
+        <p>{c.stepText[i]}</p>
+      </div>
+    ))}
+  </div>
+  <a class="text-link" href={path(lang, "how")}>
+    {c.names.how} ↗
+  </a>
+</section>
+<CTA lang={lang} />
