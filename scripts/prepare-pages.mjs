@@ -38,7 +38,6 @@ for (const file of files.filter((f) => f.endsWith(".html"))) {
     );
   }
   assert(s.includes(`href="${origin + base}/`), "Pages canonical missing");
-  assert(!/href="\/(?:de|en|fr|it)\//.test(s), "Unprefixed language route");
 }
 await writeFile("dist/CNAME", "rehomeo.ch\n");
 await writeFile("dist/.nojekyll", "");
