@@ -24,3 +24,7 @@ Live Websiteli delivery is not verified. Routing, backend source and acknowledge
 GitHub Actions run [38185393767](https://github.com/kuefmz/rehomeo/actions/runs/38185393767) passed all checks, including all six Chromium tests (8.6 seconds). The browser-results artifact includes desktop/mobile screenshots in all four languages. Reviewed German desktop homepage, Italian mobile homepage and English mobile contact form for spacing, typography, hierarchy, wrapping and optional-photo messaging. A hidden skip-link screenshot artefact was corrected after this review.
 
 Chromium could not open a page inside the restricted local workspace. Browser verification therefore ran successfully on GitHub’s hosted runner, rather than being inferred from a local build. The workflow is retained as a merge check.
+
+## GitHub Pages/API update — 12 October 2026
+
+The default static form now directly reuses Websiteli. Two labelled synthetic requests returned HTTP 200 `{ok:true}`. With `Origin: https://kuefmz.github.io`, both redirect and final response exposed `Access-Control-Allow-Origin: *`. This verifies endpoint acknowledgement/CORS, not independent inbox receipt or routing. Three additional adapter tests require the observed acknowledgement and reject HTML, missing/negative acknowledgements and network failures. Pages packaging validates all 105 routes and rewrites canonical/alternate/structured-data/sitemap URLs and assets for the project base. The optional Node adapter tests remain separate. Legal operator information remains unverified and labelled as a draft.

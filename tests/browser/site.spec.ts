@@ -1,5 +1,7 @@
 import { test, expect } from "@playwright/test";
 import site from "../../src/data/site.json" with { type: "json" };
+import formCopy from "../../src/data/form.json" with { type: "json" };
+import { endpoint } from "../../src/lib/websiteli";
 const langs = ["de", "en", "fr", "it"] as const;
 for (const lang of langs) {
   test(`${lang}: mobile layout, equivalent page switching and validation`, async ({
@@ -23,6 +25,14 @@ for (const lang of langs) {
     await menu.locator("summary").click();
     await expect(menu.locator("a").first()).toBeVisible();
     const route = `/${lang}/${site[lang].routes.contact}/`;
+    await page.route(endpoint, (route) =>
+      route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        headers: { "access-control-allow-origin": "*" },
+        body: JSON.stringify({ ok: true }),
+      }),
+    );
     await page.goto(route);
     await page.locator("button[type=submit]").click();
     await expect(page.locator("#name")).toBeFocused();
@@ -41,9 +51,10 @@ for (const lang of langs) {
     await page.locator("button[type=submit]").click();
     await expect(page.locator("#date-error")).not.toBeEmpty();
     await page.locator("#flexible").check();
+    await page.waitForTimeout(2100);
     await page.locator("button[type=submit]").click();
     await expect(page.locator("#form-status")).toContainText(
-      site[lang].unavailable,
+      formCopy[lang].success,
     );
     expect(
       await page.evaluate(
@@ -96,11 +107,16 @@ test("quote loading, duplicate prevention, confirmed success and actionable erro
     await page.locator("#" + id).selectOption(v);
   await page.locator("#privacy").check();
   await page.locator("#flexible").check();
+  await page.waitForTimeout(2100);
   let calls = 0;
-  await page.route("**/api/quote", async (route) => {
+  await page.route(endpoint, async (route) => {
     calls++;
     await new Promise((r) => setTimeout(r, 250));
-    await route.fulfill({ status: 200, json: { delivered: true } });
+    await route.fulfill({
+      status: 200,
+      json: { ok: true },
+      headers: { "access-control-allow-origin": "*" },
+    });
   });
   await page.locator("button[type=submit]").click();
   await expect(page.locator("button[type=submit]")).toBeDisabled();
@@ -128,9 +144,17 @@ test("quote loading, duplicate prevention, confirmed success and actionable erro
     await page.locator("#" + id).selectOption(v);
   await page.locator("#privacy").check();
   await page.locator("#flexible").check();
-  await page.unroute("**/api/quote");
-  await page.route("**/api/quote", (route) =>
-    route.fulfill({ status: 502, json: { delivered: false } }),
+  await page.waitForTimeout(2100);
+  await page
+    .locator("#description")
+    .fill("[TEST ONLY] Distinct failure fixture");
+  await page.unroute(endpoint);
+  await page.route(endpoint, (route) =>
+    route.fulfill({
+      status: 502,
+      json: { ok: false },
+      headers: { "access-control-allow-origin": "*" },
+    }),
   );
   await page.locator("button[type=submit]").click();
   await expect(page.locator("#form-status")).toContainText(

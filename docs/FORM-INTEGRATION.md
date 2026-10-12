@@ -1,28 +1,27 @@
-# Websiteli integration evidence and launch gate
+# Websiteli contact API reused for GitHub Pages
 
-Inspected authorised repository `kuefmz/websiteli`, commit `2e6c9b6fbeb7b8b0ebaac53d61f16256ee00db92`, especially `src/components/CTASection.astro`, `src/components/AttributionRuntime.astro` and code search for the endpoint and `doPost` across authorised `kuefmz` repositories.
+Inspected `kuefmz/websiteli`, commit `2e6c9b6fbeb7b8b0ebaac53d61f16256ee00db92`, particularly `src/components/CTASection.astro`, attribution code, deployment workflow and searches for backend source. The existing client sends JSON as `text/plain;charset=utf-8` with `type: "form"`, `name`, `email`, `phone`, `company`, `need`, `message` and `metadata`.
 
-The existing client posts JSON as `text/plain;charset=utf-8` to:
+The public endpoint is already configured in `src/lib/websiteli.ts`:
 
 `https://script.google.com/macros/s/AKfycbyAMZy4vPe56lUmFA8-Q_MDJ-AS4aJJb0vOeiViGPneWtkYn9LKXla2BmSWflsvuE-lyw/exec`
 
-Observed payload: `type: "form"`, `name`, `email`, `phone`, `company`, `need`, `message`, and `metadata`. Metadata includes language, country, source, source page/path, enquiry intent and privacy acknowledgement/version/URL. The existing client also sends broader marketing attribution and user-agent/referrer data; Rehomeo deliberately minimises this to consented, allowlisted campaign codes. Furniture/access/date information is encoded into the documented message field rather than inventing endpoint fields.
+## Observed live test results — 12 October 2026
 
-The existing client has a `website` honeypot, client validation and privacy acknowledgement. Its delivery call uses `mode: "no-cors"` and then shows success without checking an acknowledgement. That is an opaque browser response, not evidence of successful delivery. Rehomeo must not inherit that success behaviour.
+Two authorised, clearly labelled synthetic enquiries were sent with `[TEST ONLY]` names, `test@example.invalid`, no phone or real customer information, and explicit instructions not to quote or collect. Both returned **HTTP 200 and `{"ok":true}`**. The second included `Origin: https://kuefmz.github.io`; the initial 302 and final JSON response both returned **Access-Control-Allow-Origin: `*`**.
 
-No source for this particular Apps Script backend, recipient routing rules, authentication requirements, idempotency protocol or upload capability was found in the searched repositories. Other Apps Scripts found by `doPost` search belong to different applications and were not reused. No credentials were retrieved or committed.
+This establishes endpoint acknowledgement and the HTTP CORS policy needed by Pages. It does not independently verify the resulting inbox message, recipient routing or internal data retention. No operator identity or backend processing guarantees are inferred from the acknowledgement.
 
-## Exact owner/backend inputs required
+Unlike the existing Websiteli client's `no-cors` call, Rehomeo uses readable `cors` responses and requires `response.ok` plus the explicitly observed `ok === true` acknowledgement. Opaque responses, HTML HTTP 200, negative/missing acknowledgements and network failures never produce success. The success message says the delivery system accepted the enquiry, and explicitly says it is not a booking.
 
-1. Confirm this deployment is intended to receive **Rehomeo** enquiries, and how `metadata.source: "rehomeo.ch"` reaches the correct recipients. The existing `source` field is reused; no unsupported routing field is invented.
-2. Supply or make available the backend source/contract. Confirm authentication, any anti-spam verification and origin restrictions. A server-only optional Bearer variable exists but must remain unset unless that mechanism is documented. Add a different mechanism only from verified requirements.
-3. Confirm the actual response body **after durable acceptance/delivery**. Set `WEBSITELI_ACK_FIELD` and `WEBSITELI_ACK_VALUE` from that contract. A generic HTTP 200, HTML page, timeout or false acknowledgement will never produce success. The adapter currently expects a top-level JSON field; change it if the verified contract requires a different shape.
-4. Confirm upload support and limits. None was observed, so there is no photo file input and no attachment transmission. The customer is told to arrange optional photos afterwards. Specify a supported secure channel before adding uploads.
-5. Provide an authorised test mode/test recipient and a way to verify the resulting record/email. Use synthetic data labelled `[TEST ONLY] Rehomeo integration – do not arrange collection`. Do not send a live test until correct routing and recipient are established. Record status and receipt without copying personal data into the repository.
-6. Complete operator/privacy review, then set `OPERATOR_REVIEWED=true`, a genuine `PRIVACY_POLICY_VERSION`, `QUOTE_ENABLED=true` and rebuild with `PUBLIC_QUOTE_ENABLED=true`.
+## No manual API setup for Pages
 
-## Verification completed
+The default static client is enabled and posts directly to this existing public endpoint. No API key, secret, separate server or repository variable is needed. Name/email/optional phone are mapped to known fields; collection details go in the existing `message`. Metadata includes language, country, source brand, source page/path, query-free page URL and privacy acknowledgement/URL/draft version. No unsupported attachments, user agents, arbitrary URL parameters or analytics events are sent.
 
-Synthetic mocked responses exercise the real adapter: successful explicit acknowledgement, duplicate requests, invalid input, missing configuration, HTML HTTP 200, negative acknowledgements and network failures. No live endpoint submission has been made, because routing and a verifiable acknowledgement are unavailable. This is **not** a claim that live delivery works.
+Known client honeypot measures are preserved, with validation, a minimum fill time, loading lock and session-level duplicate prevention. Only a digest and submission state are stored in sessionStorage; no enquiry text is stored there. An uncertain request is not automatically resent. Storage restrictions reduce deduplication to the active page; backend idempotency was not documented. Backend validation/anti-spam implementation was not found and is not claimed to have been audited.
 
-Deduplication is local and persistent on one server with its volume. On timeout, the endpoint might have accepted a request even though the reply was lost. The adapter records `unconfirmed` and does not resend automatically. Exact-once delivery across failures ultimately requires backend-supported idempotency; no undocumented request-id payload has been invented. Owner investigation and a documented retention/unconfirmed-request procedure are launch inputs.
+Campaign capture is optional: only codes approved in `PUBLIC_CAMPAIGN_CODES` and explicitly consented by the customer are sent. With the default empty list, no attribution is sent. This configuration is not required to launch.
+
+Photo upload support was not found. Photos remain optional and the site explains that transmission can be arranged afterwards. Operator/legal information is still labelled as awaiting verification; reuse of Websiteli's API does not establish Rehomeo's legal operator.
+
+The optional Node adapter remains for future non-Pages hosting; its additional server configuration is not needed by the Pages deployment. Unit and browser tests mock the endpoint and do not send additional live enquiries on every CI run.

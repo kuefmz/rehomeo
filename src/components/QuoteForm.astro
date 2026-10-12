@@ -4,7 +4,7 @@ import { site, path, type Locale } from "../data/routes";
 const { lang } = Astro.props as { lang: Locale };
 const c = site[lang];
 const f = copy[lang];
-const enabled = import.meta.env.PUBLIC_QUOTE_ENABLED === "true";
+const enabled = import.meta.env.PUBLIC_QUOTE_ENABLED !== "false";
 const fields = [
   ["name", "text", "name"],
   ["email", "email", "email"],
@@ -24,7 +24,7 @@ const fields = [
 <form
   id="quote-form"
   method="post"
-  action="/api/quote"
+  action="#quote-form"
   novalidate
   data-enabled={String(enabled)}
   data-lang={lang}
@@ -40,7 +40,15 @@ const fields = [
           type={type}
           autocomplete={autocomplete}
           required={!["phone", "date"].includes(name)}
-          maxlength={type === "date" ? undefined : name === "email" ? 254 : 120}
+          maxlength={
+            type === "date"
+              ? undefined
+              : name === "email"
+                ? 254
+                : name === "phone"
+                  ? 80
+                  : 120
+          }
           aria-describedby={`${name}-error`}
         />
         <span class="field-error" id={`${name}-error`}></span>
@@ -139,6 +147,7 @@ const fields = [
   </noscript>
 </form>
 <script>
+  import { payloadFor, sendEnquiry } from "../lib/websiteli";
   const form = document.querySelector<HTMLFormElement>("#quote-form");
   if (form) {
     const c = JSON.parse(form.dataset.copy!);
@@ -215,32 +224,76 @@ const fields = [
       pending = true;
       button.disabled = true;
       status.textContent = c.sending;
-      const body: any = Object.fromEntries(new FormData(form));
-      body.language = form.dataset.lang;
+      const body = Object.fromEntries(new FormData(form)) as Record<
+        string,
+        string
+      >;
+      body.language = form.dataset.lang!;
       body.sourcePage = location.pathname;
       body.requestId = requestId;
-      body.startedAt = started;
+      body.startedAt = String(started);
+      const approvedCampaigns = (import.meta.env.PUBLIC_CAMPAIGN_CODES || "")
+        .split(",")
+        .filter(Boolean);
       if (body.campaignConsent === "yes") {
         const params = new URLSearchParams(location.search);
-        body.campaignCode = params.get("campaign") || "";
+        const candidate = params.get("campaign") || "";
+        if (approvedCampaigns.includes(candidate))
+          body.campaignCode = candidate;
       }
       try {
-        const response = await fetch("/api/quote", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-          signal: AbortSignal.timeout(20000),
-        });
-        const result = await response.json();
-        if (
-          result.code === "duplicate-or-unconfirmed" ||
-          result.code === "delivery-unconfirmed"
-        ) {
+        if (body.website || Date.now() - started < 2000) {
+          status.textContent = c.error;
+          return;
+        }
+        const stable = [
+          body.name,
+          body.email,
+          body.phone,
+          body.country,
+          body.postcode,
+          body.town,
+          body.date,
+          body.flexible,
+          body.service,
+          body.description,
+          body.floor,
+          body.lift,
+          body.dismantling,
+        ];
+        const digest = Array.from(
+          new Uint8Array(
+            await crypto.subtle.digest(
+              "SHA-256",
+              new TextEncoder().encode(JSON.stringify(stable)),
+            ),
+          ),
+        )
+          .map((b) => b.toString(16).padStart(2, "0"))
+          .join("");
+        const key = "rehomeo-enquiry-" + digest;
+        let prior: string | null = null;
+        try {
+          prior = sessionStorage.getItem(key);
+        } catch {}
+        if (prior) {
           status.textContent = c.uncertain;
           return;
         }
-        if (!response.ok || result.delivered !== true)
-          throw new Error("unconfirmed");
+        try {
+          sessionStorage.setItem(key, "unconfirmed");
+        } catch {}
+        const privacyUrl =
+          form.querySelector<HTMLAnchorElement>(".checkbox a")!.href;
+        const payload = payloadFor(body, {
+          pageUrl: location.origin + location.pathname,
+          privacyUrl,
+          campaignCode: body.campaignCode,
+        });
+        await sendEnquiry(payload);
+        try {
+          sessionStorage.setItem(key, "accepted");
+        } catch {}
         status.textContent = c.success;
         completed = true;
         form.reset();
