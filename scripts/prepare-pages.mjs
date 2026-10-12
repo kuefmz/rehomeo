@@ -1,7 +1,7 @@
 import { readFile, writeFile, readdir } from "node:fs/promises";
 import assert from "node:assert/strict";
-const base = "/rehomeo";
-const origin = "https://kuefmz.github.io";
+const base = "";
+const origin = "https://rehomeo.ch";
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   return (
@@ -15,7 +15,7 @@ async function walk(dir) {
 const files = await walk("dist");
 for (const file of files.filter((f) => /\.(html|xml|txt)$/.test(f))) {
   let s = await readFile(file, "utf8");
-  s = s.replaceAll("https://rehomeo.ch/", origin + base + "/");
+  s = s.replaceAll("https://kuefmz.github.io/rehomeo/", origin + "/");
   if (file.endsWith(".html"))
     s = s.replace(
       /\b(href|src|action)="\/(?!\/)([^"]*)"/g,
@@ -40,6 +40,7 @@ for (const file of files.filter((f) => f.endsWith(".html"))) {
   assert(s.includes(`href="${origin + base}/`), "Pages canonical missing");
   assert(!/href="\/(?:de|en|fr|it)\//.test(s), "Unprefixed language route");
 }
+await writeFile("dist/CNAME", "rehomeo.ch\n");
 await writeFile("dist/.nojekyll", "");
 console.log(
   `GitHub Pages package verified: ${routes.size} routes at ${origin}${base}/`,
