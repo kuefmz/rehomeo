@@ -618,3 +618,13 @@ textarea {
 .language-dropdown nav a:hover, .language-dropdown nav a:focus-visible { background: #edf1e9; }
 .language-dropdown nav a[aria-current="page"] { font-weight: 700; color: var(--green); }
 @media(max-width:700px) { .language-dropdown summary { padding: 9px; } .language-dropdown nav { right: 0; } }
+
+/* Homepage clarity and conversion improvements */
+.hero-actions { display:flex; align-items:center; flex-wrap:wrap; gap:18px; margin-top:28px; }
+.hero-secondary { display:inline-flex; align-items:center; gap:10px; font-weight:700; text-decoration-thickness:1px; text-underline-offset:5px; padding:12px 2px; }
+.quick-explain { padding-block: 10px 38px; }
+.quick-explain-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.quick-explain-grid > div { border:1px solid var(--line); border-radius:18px; padding:23px; background:#fffdf8; }
+.quick-explain-grid strong { display:block; font-size:1.05rem; margin-bottom:9px; }
+.quick-explain-grid p { color:var(--muted); font-size:.93rem; line-height:1.6; margin:0; }
+@media(max-width:700px) { .hero-actions { align-items:stretch; gap:12px; } .hero-actions .button { width:100%; } .hero-secondary { justify-content:center; } .quick-explain-grid { grid-template-columns:1fr; } .quick-explain { padding-bottom:20px; } }
