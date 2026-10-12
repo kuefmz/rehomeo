@@ -87,8 +87,8 @@ const graph = [
           inLanguage: lang,
           author: { "@type": "Organization", name: "Rehomeo" },
           mainEntityOfPage: absolute(current),
-          ...(article.publishedAt
-            ? { datePublished: article.publishedAt }
+          ...(article.publishedAt || article.preparedAt
+            ? { datePublished: article.publishedAt || article.preparedAt }
             : {}),
           ...(article.updatedAt ? { dateModified: article.updatedAt } : {}),
         },
@@ -112,7 +112,7 @@ const graph = [
     <link
       rel="alternate"
       hreflang="x-default"
-      href={absolute(article ? links.de : pageKey === "home" ? "/" : links.de)}
+      href={absolute(links.de)}
     />
     <meta property="og:title" content={title + " | Rehomeo"} />
     <meta property="og:description" content={description} />
@@ -158,7 +158,7 @@ const graph = [
           </div>
         </details>
         <div class="desktop-nav">
-          {(["how", "clearance", "pickup", "reuse"] as PageKey[]).map((k) => (
+          {(["how", "clearance", "pickup", "reuse", "blog"] as PageKey[]).map((k) => (
             <a
               href={path(lang, k)}
               aria-current={pageKey === k ? "page" : undefined}
