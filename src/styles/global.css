@@ -605,3 +605,16 @@ textarea {
       border-color 0.16s;
   }
 }
+
+/* Compact, accessible language switcher in the primary navigation */
+.language-dropdown { position: relative; flex-shrink: 0; }
+.language-dropdown summary { list-style: none; display: flex; align-items: center; gap: 8px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; cursor: pointer; font-size: .85rem; white-space: nowrap; }
+.language-dropdown summary::-webkit-details-marker { display: none; }
+.language-dropdown summary:hover, .language-dropdown[open] summary { background: #edf1e9; }
+.language-chevron { font-size: 1.1rem; margin-left: 3px; }
+.language-dropdown[open] .language-chevron { transform: rotate(180deg); }
+.language-dropdown nav { position: absolute; z-index: 30; top: calc(100% + 8px); right: 0; min-width: 180px; padding: 7px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 14px 35px #233b3125; display: grid; gap: 2px; }
+.language-dropdown nav a { display: flex; justify-content: space-between; gap: 15px; padding: 10px 12px; border-radius: 8px; text-decoration: none; font-size: .9rem; }
+.language-dropdown nav a:hover, .language-dropdown nav a:focus-visible { background: #edf1e9; }
+.language-dropdown nav a[aria-current="page"] { font-weight: 700; color: var(--green); }
+@media(max-width:700px) { .language-dropdown summary { padding: 9px; } .language-dropdown nav { right: 0; } }
