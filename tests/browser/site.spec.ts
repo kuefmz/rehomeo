@@ -63,7 +63,7 @@ for (const lang of langs) {
     ).toBeTruthy();
     for (const other of langs)
       await expect(
-        page.locator(`.language-bar a[lang=${other}]`),
+        page.locator(`.language-dropdown nav a[lang=${other}]`),
       ).toHaveAttribute("href", `/${other}/${site[other].routes.contact}/`);
     expect(errors).toEqual([]);
     await page.screenshot({
