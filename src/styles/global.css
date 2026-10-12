@@ -628,3 +628,8 @@ textarea {
 .quick-explain-grid strong { display:block; font-size:1.05rem; margin-bottom:9px; }
 .quick-explain-grid p { color:var(--muted); font-size:.93rem; line-height:1.6; margin:0; }
 @media(max-width:700px) { .hero-actions { align-items:stretch; gap:12px; } .hero-actions .button { width:100%; } .hero-secondary { justify-content:center; } .quick-explain-grid { grid-template-columns:1fr; } .quick-explain { padding-bottom:20px; } }
+
+/* Rehomeo brand mark */
+.header .brand { display: inline-flex; align-items: center; gap: 0.45rem; }
+.header .brand img { width: 34px; height: 34px; flex-shrink: 0; }
+.header .brand span { color: inherit; margin-left: 0; }
