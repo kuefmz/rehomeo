@@ -1,0 +1,102 @@
+---
+import { getCollection, render } from "astro:content";
+import { locales, site, path, type Locale, type PageKey } from "../data/routes";
+import Layout from "../layouts/Layout.astro";
+import Home from "../components/Home.astro";
+import Page from "../components/Page.astro";
+export async function getStaticPaths() {
+  const articles = await getCollection("articles");
+  return locales.flatMap((lang) => {
+    const base = Object.keys(site[lang].routes).map((key) => ({
+      params: { route: path(lang, key as PageKey).slice(1, -1) },
+      props: { lang, pageKey: key },
+    }));
+    const posts = articles
+      .filter((a) => a.data.lang === lang)
+      .map((a) => ({
+        params: { route: `${lang}/${site[lang].routes.blog}/${a.data.slug}` },
+        props: {
+          lang,
+          pageKey: "blog",
+          article: a,
+          alternatives: Object.fromEntries(
+            articles
+              .filter((b) => b.data.translationKey === a.data.translationKey)
+              .map((b) => [
+                b.data.lang,
+                `${path(b.data.lang, "blog")}${b.data.slug}/`,
+              ]),
+          ),
+        },
+      }));
+    return [...base, ...posts];
+  });
+}
+const { lang, pageKey, article, alternatives } = Astro.props as {
+  lang: Locale;
+  pageKey: PageKey;
+  article?: any;
+  alternatives?: Record<string, string>;
+};
+const c = site[lang];
+const title =
+  article?.data.title || (pageKey === "home" ? c.hero : c.names[pageKey]);
+const description =
+  article?.data.description ||
+  (pageKey === "home"
+    ? c.intro
+    : (
+        {
+          how: c.how,
+          clearance: c.clearance,
+          pickup: c.pickup,
+          reuse: c.env,
+          coverage: c.coverage,
+          faq: c.faqPairs[0][1],
+          contact: c.formIntro,
+          blog: c.footer,
+          privacy: c.names.privacy + ": " + c.legal,
+          business: c.names.business + ": " + c.legal,
+        } as Record<string, string>
+      )[pageKey]);
+const rendered = article ? await render(article) : null;
+const Content = rendered?.Content;
+---
+
+<Layout
+  lang={lang}
+  pageKey={pageKey}
+  title={title}
+  description={description}
+  alternatives={alternatives}
+  article={article?.data}
+  noindex={["privacy", "business"].includes(pageKey)}
+>
+  {pageKey === "home" ? (
+    <Home lang={lang} />
+  ) : article && Content ? (
+    <article class="article shell">
+      <p class="eyebrow">{c.names.blog}</p>
+      <h1>{title}</h1>
+      <p class="lead">{article.data.excerpt}</p>
+      <p class="fine">
+        {c.author} · {c.draft}
+      </p>
+      <div class="prose">
+        <Content />
+      </div>
+      <aside class="sources">
+        <h2>{c.sources}</h2>
+        <ul>
+          {article.data.sources.map((s: any) => (
+            <li>
+              <a href={s.url}>{s.label}</a>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </article>
+  ) : (
+    <Page lang={lang} pageKey={pageKey} />
+  )}
+</Layout>

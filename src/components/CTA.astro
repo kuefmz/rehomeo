@@ -1,0 +1,17 @@
+---
+import { site, path, type Locale } from "../data/routes";
+const { lang } = Astro.props as { lang: Locale };
+const c = site[lang];
+---
+
+<section class="shell">
+  <div class="cta">
+    <div>
+      <h2>{c.ctaText}</h2>
+      <p>{c.ctaSub}</p>
+    </div>
+    <a class="button light" href={path(lang, "contact")}>
+      {c.names.contact} <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</section>

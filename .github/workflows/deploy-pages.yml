@@ -1,0 +1,55 @@
+name: Deploy GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm run build
+      - run: node scripts/prepare-pages.mjs
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist/
+  deploy:
+    timeout-minutes: 20
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Wait for owner to enable GitHub Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "Enable Settings → Pages → Source: GitHub Actions. Deployment will continue automatically."
+          for attempt in $(seq 1 60); do
+            status=$(curl --silent --output /dev/null --write-out '%{http_code}' \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${{ github.repository }}/pages")
+            if [ "$status" = "200" ]; then exit 0; fi
+            sleep 15
+          done
+          echo "Pages was not enabled within 15 minutes. Enable it and ask the assistant to retry this job."
+          exit 1
+      - uses: actions/configure-pages@v5
+      - uses: actions/deploy-pages@v4
+        id: deployment

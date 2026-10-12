@@ -1,0 +1,310 @@
+---
+import copy from "../data/form.json";
+import { site, path, type Locale } from "../data/routes";
+const { lang } = Astro.props as { lang: Locale };
+const c = site[lang];
+const f = copy[lang];
+const enabled = import.meta.env.PUBLIC_QUOTE_ENABLED !== "false";
+const fields = [
+  ["name", "text", "name"],
+  ["email", "email", "email"],
+  ["phone", "tel", "tel"],
+  ["postcode", "text", "postal-code"],
+  ["town", "text", "address-level2"],
+  ["date", "date", "off"],
+  ["floor", "text", "off"],
+] as const;
+---
+
+<div class="notice" role="status">
+  {!enabled && c.unavailable}
+</div>
+<p>{c.formIntro}</p>
+<p>{c.germany}</p>
+<form
+  id="quote-form"
+  method="post"
+  action="#quote-form"
+  novalidate
+  data-enabled={String(enabled)}
+  data-lang={lang}
+  data-copy={JSON.stringify({ ...f, unavailable: c.unavailable })}
+>
+  <div class="form-grid">
+    {fields.map(([name, type, autocomplete]) => (
+      <div class="field">
+        <label for={name}>{f.labels[name as keyof typeof f.labels]}</label>
+        <input
+          id={name}
+          name={name}
+          type={type}
+          autocomplete={autocomplete}
+          required={!["phone", "date"].includes(name)}
+          maxlength={
+            type === "date"
+              ? undefined
+              : name === "email"
+                ? 254
+                : name === "phone"
+                  ? 80
+                  : 120
+          }
+          aria-describedby={`${name}-error`}
+        />
+        <span class="field-error" id={`${name}-error`}></span>
+      </div>
+    ))}
+    <div class="field">
+      <label for="country">{f.labels.country}</label>
+      <select
+        id="country"
+        name="country"
+        aria-describedby="country-error"
+        required
+      >
+        <option value="CH">{f.ch}</option>
+        <option value="DE">{f.de}</option>
+      </select>
+      <span id="country-error" class="field-error"></span>
+    </div>
+    <div class="field">
+      <label for="service">{f.labels.service}</label>
+      <select
+        id="service"
+        name="service"
+        required
+        aria-describedby="service-error"
+      >
+        <option value="">{f.choose}</option>
+        <option value="clearance">{f.full}</option>
+        <option value="selected">{f.selected}</option>
+      </select>
+      <span id="service-error" class="field-error"></span>
+    </div>
+    {(["lift", "dismantling"] as const).map((name) => (
+      <div class="field">
+        <label for={name}>{f.labels[name]}</label>
+        <select
+          id={name}
+          name={name}
+          required
+          aria-describedby={`${name}-error`}
+        >
+          <option value="">{f.choose}</option>
+          <option value="yes">{f.yes}</option>
+          <option value="no">{f.no}</option>
+          <option value="unknown">{f.unknown}</option>
+        </select>
+        <span id={`${name}-error`} class="field-error"></span>
+      </div>
+    ))}
+    <div class="field full">
+      <label for="description">{f.labels.description}</label>
+      <textarea
+        id="description"
+        name="description"
+        rows="6"
+        required
+        maxlength="8000"
+        aria-describedby="description-error"
+      ></textarea>
+      <span id="description-error" class="field-error"></span>
+    </div>
+  </div>
+  <label class="checkbox">
+    <input type="checkbox" id="flexible" name="flexible" value="yes" />
+    {f.labels.flexible}
+  </label>
+  <p class="fine">{c.photos}</p>
+  <label class="checkbox">
+    <input
+      id="privacy"
+      name="privacy"
+      type="checkbox"
+      required
+      value="yes"
+      aria-describedby="privacy-error"
+    />
+    <span>
+      {f.labels.privacy}: <a href={path(lang, "privacy")}>{c.names.privacy}</a>.
+    </span>
+  </label>
+  <span id="privacy-error" class="field-error"></span>
+  <label class="checkbox">
+    <input name="campaignConsent" type="checkbox" value="yes" />
+    {f.campaignHelp}
+  </label>
+  <div class="honeypot" aria-hidden="true">
+    <label for="website">Website</label>
+    <input id="website" name="website" tabindex="-1" autocomplete="off" />
+  </div>
+  <button class="button" type="submit">
+    {c.names.contact}
+  </button>
+  <p id="form-status" role="status" aria-live="polite" tabindex="-1"></p>
+  <noscript>
+    <p>{f.nojs}</p>
+  </noscript>
+</form>
+<script>
+  import { payloadFor, sendEnquiry } from "../lib/websiteli";
+  const form = document.querySelector<HTMLFormElement>("#quote-form");
+  if (form) {
+    const c = JSON.parse(form.dataset.copy!);
+    const status = document.querySelector<HTMLElement>("#form-status")!;
+    const button = form.querySelector<HTMLButtonElement>("button")!;
+    let pending = false;
+    let completed = false;
+    let requestId = crypto.randomUUID();
+    const started = Date.now();
+    form.addEventListener("input", () => {
+      if (!pending) {
+        completed = false;
+        button.disabled = false;
+      }
+    });
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (pending || completed) return;
+      let first: HTMLElement | null = null;
+      for (const el of Array.from(form.elements)) {
+        if (!(
+          el instanceof HTMLInputElement ||
+          el instanceof HTMLSelectElement ||
+          el instanceof HTMLTextAreaElement
+        ))
+          continue;
+        const error = document.getElementById(el.id + "-error");
+        if (!error) continue;
+        let message = "";
+        if (
+          el.validity.valueMissing ||
+          (el.required && el.type !== "checkbox" && !el.value.trim())
+        )
+          message = c.required;
+        else if (el.validity.typeMismatch) message = c.invalid;
+        else if (!el.validity.valid) message = c.required;
+        error.textContent = message;
+        el.setAttribute("aria-invalid", String(!!message));
+        if (message && !first) first = el;
+      }
+      const date = form.querySelector<HTMLInputElement>("#date")!;
+      const flexible = form.querySelector<HTMLInputElement>("#flexible")!;
+      const today = new Date().toLocaleDateString("sv-SE", {
+        timeZone: "Europe/Zurich",
+      });
+      if (
+        (!date.value && !flexible.checked) ||
+        (date.value && date.value < today)
+      ) {
+        document.getElementById("date-error")!.textContent = c.dateError;
+        date.setAttribute("aria-invalid", "true");
+        first ||= date;
+      }
+      const postcode = form.querySelector<HTMLInputElement>("#postcode")!;
+      const country = form.querySelector<HTMLSelectElement>("#country")!;
+      if (
+        !(country.value === "CH" ? /^\d{4}$/ : /^\d{5}$/).test(postcode.value)
+      ) {
+        document.getElementById("postcode-error")!.textContent =
+          c.postcodeError;
+        postcode.setAttribute("aria-invalid", "true");
+        first ||= postcode;
+      }
+      if (first) {
+        first.focus();
+        status.textContent = c.required;
+        return;
+      }
+      if (form.dataset.enabled !== "true") {
+        status.textContent = c.unavailable;
+        status.focus();
+        return;
+      }
+      pending = true;
+      button.disabled = true;
+      status.textContent = c.sending;
+      const body = Object.fromEntries(new FormData(form)) as Record<
+        string,
+        string
+      >;
+      body.language = form.dataset.lang!;
+      body.sourcePage = location.pathname;
+      body.requestId = requestId;
+      body.startedAt = String(started);
+      const approvedCampaigns = (import.meta.env.PUBLIC_CAMPAIGN_CODES || "")
+        .split(",")
+        .filter(Boolean);
+      if (body.campaignConsent === "yes") {
+        const params = new URLSearchParams(location.search);
+        const candidate = params.get("campaign") || "";
+        if (approvedCampaigns.includes(candidate))
+          body.campaignCode = candidate;
+      }
+      try {
+        if (body.website || Date.now() - started < 2000) {
+          status.textContent = c.error;
+          return;
+        }
+        const stable = [
+          body.name,
+          body.email,
+          body.phone,
+          body.country,
+          body.postcode,
+          body.town,
+          body.date,
+          body.flexible,
+          body.service,
+          body.description,
+          body.floor,
+          body.lift,
+          body.dismantling,
+        ];
+        const digest = Array.from(
+          new Uint8Array(
+            await crypto.subtle.digest(
+              "SHA-256",
+              new TextEncoder().encode(JSON.stringify(stable)),
+            ),
+          ),
+        )
+          .map((b) => b.toString(16).padStart(2, "0"))
+          .join("");
+        const key = "rehomeo-enquiry-" + digest;
+        let prior: string | null = null;
+        try {
+          prior = sessionStorage.getItem(key);
+        } catch {}
+        if (prior) {
+          status.textContent = c.uncertain;
+          return;
+        }
+        try {
+          sessionStorage.setItem(key, "unconfirmed");
+        } catch {}
+        const privacyUrl =
+          form.querySelector<HTMLAnchorElement>(".checkbox a")!.href;
+        const payload = payloadFor(body, {
+          pageUrl: location.origin + location.pathname,
+          privacyUrl,
+          campaignCode: body.campaignCode,
+        });
+        await sendEnquiry(payload);
+        try {
+          sessionStorage.setItem(key, "accepted");
+        } catch {}
+        status.textContent = c.success;
+        completed = true;
+        form.reset();
+        requestId = crypto.randomUUID();
+      } catch {
+        status.textContent = c.error;
+      } finally {
+        pending = false;
+        button.disabled = completed;
+        status.focus();
+      }
+    });
+  }
+</script>
