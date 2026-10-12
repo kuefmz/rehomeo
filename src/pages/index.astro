@@ -1,67 +1,13 @@
 ---
-import { locales, site, path, absolute } from "../data/routes";
-import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+import Home from "../components/Home.astro";
 ---
 
-<!doctype html>
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Rehomeo – Sprache wählen / Choose your language</title>
-    <meta
-      name="description"
-      content="Rehomeo: Wohnungsräumung und Möbelabholung mit Wiederverwendung im Blick. Deutsch, English, Français, Italiano."
-    />
-    <meta property="og:title" content="Rehomeo – Platz für Neues" />
-    <meta
-      property="og:description"
-      content="Wohnungsräumung und Möbelabholung mit Wiederverwendung im Blick."
-    />
-    <meta property="og:url" content={absolute("/")} />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content={absolute("/social.png")} />
-    <link rel="canonical" href={absolute("/")} />
-    {locales.map((l) => (
-      <link rel="alternate" hreflang={l + "-CH"} href={absolute(path(l))} />
-    ))}
-    <link rel="alternate" hreflang="x-default" href={absolute("/")} />
-  </head>
-  <body>
-    <main class="language-choice shell">
-      <a class="brand" href="/de/">
-        rehomeo<span aria-hidden="true">↗</span>
-      </a>
-      <p class="eyebrow">SCHWEIZ · SWITZERLAND · SUISSE · SVIZZERA</p>
-      <h1>
-        Platz für Neues.
-        <br />
-        <span>A new home for useful things.</span>
-      </h1>
-      <p>
-        Sprache wählen · Choose your language · Choisissez votre langue · Scegli
-        la lingua
-      </p>
-      <div class="cards">
-        {locales.map((l) => (
-          <a class="card" lang={l} href={path(l)}>
-            <h2>
-              {
-                {
-                  de: "Deutsch",
-                  en: "English",
-                  fr: "Français",
-                  it: "Italiano",
-                }[l]
-              }
-            </h2>
-            <p>{site[l].footer}</p>↗
-          </a>
-        ))}
-      </div>
-      <p>
-        <a href="/de/">Weiter auf Deutsch</a>
-      </p>
-    </main>
-  </body>
-</html>
+<Layout
+  lang="de"
+  pageKey="home"
+  title="Wohnungsräumung & Möbelabholung in der Schweiz"
+  description="Wohnung räumen oder Möbel abholen lassen? Rehomeo hilft Ihnen, eine Räumung oder Abholung zu organisieren. Individuelle Offerte anfragen; Wiederverwendung wo möglich."
+>
+  <Home lang="de" />
+</Layout>
