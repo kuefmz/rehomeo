@@ -10,9 +10,10 @@ const c = site[lang];
     <p class="eyebrow">{c.tag}</p>
     <h1>{c.hero}</h1>
     <p class="lead">{c.intro}</p>
-    <a class="button" href={path(lang, "contact")}>
-      {c.names.contact} <span aria-hidden="true">↗</span>
-    </a>
+    <div class="hero-actions">
+      <a class="button" href={path(lang, "contact")}>{c.names.contact} <span aria-hidden="true">↗</span></a>
+      <a class="hero-secondary" href={path(lang, "how")}>{c.names.how} <span aria-hidden="true">→</span></a>
+    </div>
     <p class="fine">{c.note}</p>
   </div>
   <img
@@ -22,6 +23,13 @@ const c = site[lang];
     alt={c.illustration}
     fetchpriority="high"
   />
+</section>
+<section class="shell quick-explain" aria-label={c.names.how}>
+  <div class="quick-explain-grid">
+    <div><strong>{lang === "de" ? "Was ist Rehomeo?" : lang === "fr" ? "Qu’est-ce que Rehomeo ?" : lang === "it" ? "Cos’è Rehomeo?" : "What is Rehomeo?"}</strong><p>{lang === "de" ? "Ein Service für Wohnungsräumung und Möbelabholung." : lang === "fr" ? "Un service de débarras et de collecte de meubles." : lang === "it" ? "Un servizio di sgombero e ritiro mobili." : "A service for apartment clearance and furniture pickup."}</p></div>
+    <div><strong>{lang === "de" ? "Was bringt mir das?" : lang === "fr" ? "Quel avantage ?" : lang === "it" ? "Qual è il vantaggio?" : "Why choose it?"}</strong><p>{lang === "de" ? "Weniger selbst organisieren. Ein klar vereinbarter Umfang und eine individuelle Offerte." : lang === "fr" ? "Moins de choses à organiser, avec un devis et un périmètre convenus." : lang === "it" ? "Meno da organizzare, con un preventivo e un ambito concordati." : "Less to coordinate, with a clear scope and individual quote."}</p></div>
+    <div><strong>{lang === "de" ? "Was passiert mit den Sachen?" : lang === "fr" ? "Que deviennent les objets ?" : lang === "it" ? "Che fine fanno gli oggetti?" : "What happens to the items?"}</strong><p>{lang === "de" ? "Brauchbares prüfen wir nach Möglichkeit für eine weitere Nutzung. Nicht alles kann gespendet werden." : lang === "fr" ? "Le réemploi est envisagé lorsque c’est possible; tout ne peut pas être donné." : lang === "it" ? "Valutiamo il riutilizzo quando possibile; non tutto può essere donato." : "Suitable items are considered for reuse where possible; donation is not guaranteed."}</p></div>
+  </div>
 </section>
 <section class="shell section">
   <p class="eyebrow">REHOMEO</p>
