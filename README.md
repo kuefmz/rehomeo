@@ -14,7 +14,7 @@ Pushes to `main` build and deploy automatically. If the initial deployment ran b
 
 The form directly reuses Websiteli's existing public Google Apps Script endpoint and observed payload. Two clearly labelled synthetic tests returned HTTP 200 `{"ok":true}`; response headers allow browser CORS. The client checks this acknowledgement and never reports success from an opaque/no-cors response, generic HTML 200 or failure. No manual API setup is required.
 
-[Integration evidence and limitations](docs/FORM-INTEGRATION.md) document the endpoint, known fields, acknowledgement, testing and remaining backend uncertainty. An acknowledgement confirms acceptance by that endpoint; inbox receipt/routing and internal retention were not independently inspected. Photos are optional; unsupported uploads are not sent. The site has no analytics or tracking cookies and does not log personal information.
+[Integration evidence and limitations](docs/FORM-INTEGRATION.md) document the endpoint, known fields, acknowledgement, testing and remaining backend uncertainty. An acknowledgement confirms acceptance by that endpoint; inbox receipt/routing and internal retention were not independently inspected. Photos are optional; unsupported uploads are not sent. The shared page head includes Google Analytics tag `G-GV20G3X9ST`.
 
 Privacy and business-information pages remain clearly labelled noindex drafts because verified Rehomeo operator details were not supplied. Do not infer Rehomeo's operator identity from Websiteli or the GitHub account, or claim legal compliance without review. The API integration does not resolve that editorial/legal gap.
 
